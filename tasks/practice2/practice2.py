@@ -32,9 +32,9 @@ def get_amount() -> float:
     """
 
     # пиши код здесь
-    res=random(100,1000000)
-    amount= f'{res:.2f}'
-    return amount
+    res=random.uniform(100,1000001)
+    res=round(res,2)
+    return res
 
 
 def is_phone_correct(phone_number: str) -> bool:
@@ -49,6 +49,7 @@ def is_phone_correct(phone_number: str) -> bool:
 
     # пиши код здесь
     if phone_number[0]=='+' or phone_number[1]=='7':  return 0
+    phone_number=phone_number.replace('+','')
     return phone_number.isnumeric()
 
 
@@ -66,10 +67,9 @@ def is_amount_correct(current_amount: float, transfer_amount: str) -> bool:
 
     # пиши код здесь
     if current_amount>=transfer_amount:
-        result=1
+        return True
     else:
-        result=0
-    return result
+        return False
 
 
 def moderate_text(text: str, uncultured_words: Iterable[str]) -> str:
