@@ -48,6 +48,7 @@ def is_phone_correct(phone_number: str) -> bool:
     """
 
     # пиши код здесь
+    if phone_number[0]=='+' or phone_number[1]=='7':  return 0
     return phone_number.isnumeric()
 
 
