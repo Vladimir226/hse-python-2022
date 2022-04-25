@@ -48,8 +48,9 @@ def is_phone_correct(phone_number: str) -> bool:
     """
 
     # пиши код здесь
-    if phone_number[0]=='+' or phone_number[1]=='7':  return 0
+    if phone_number[0]!='+' or phone_number[1]!='7':  return 0
     phone_number=phone_number.replace('+','')
+    if len(phone_number)!=11: return 0
     return phone_number.isnumeric()
 
 
@@ -66,7 +67,7 @@ def is_amount_correct(current_amount: float, transfer_amount: str) -> bool:
     """
 
     # пиши код здесь
-    if current_amount>=transfer_amount:
+    if current_amount>=float(transfer_amount):
         return True
     else:
         return False
@@ -88,14 +89,15 @@ def moderate_text(text: str, uncultured_words: Iterable[str]) -> str:
     """
 
     # пиши код здесь
-    str = str.replace('"', '') 
-    str = str.replace("'", '') 
-    str = re.sub(r'\s+', ' ', str)
-    str = str.capitalize() 
+    text = text.replace('"', '') 
+    text = text.replace("'", '') 
+    text=text.strip()
+    text = re.sub(r'\s+', ' ', text)
+    text = text.capitalize() 
     for uncult_word in uncultured_words:
-        str=str.replace(uncult_word,"#"*len(uncult_word))
+        text=text.replace(uncult_word,"#"*len(uncult_word))
 
-    return str
+    return text
 
 
 def create_request_for_loan(user_info: str) -> str:
@@ -118,12 +120,12 @@ def create_request_for_loan(user_info: str) -> str:
     """
 
     # пиши код здесь
-    format_words=str.split(',')
+    format_words=user_info.split(',')
     result=''
-    result+="Фамилия:" + format_words[0]
-    result+="Имя:" + format_words[1]
-    result+="Отчество:" + format_words[2]
-    result+="Дата рождения:" + format_words[3]
-    result+="Запрошенная сумма:" + format_words[4]
+    result+="Фамилия: " + format_words[0] +"\n"
+    result+="Имя: " + format_words[1] +"\n"
+    result+="Отчество: " + format_words[2] +"\n"
+    result+="Дата рождения: " + format_words[3] +"\n"
+    result+="Запрошенная сумма: " + format_words[4]
 
     return result
