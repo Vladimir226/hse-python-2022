@@ -1,3 +1,4 @@
+from multiprocessing.dummy import current_process
 from typing import Any, Optional
 
 
@@ -39,5 +40,15 @@ def search_phone(content: Any, name: str) -> Optional[str]:
     """
 
     # пиши свой код здесь
-
+    data = [content]
+    while data:
+        current = data.pop()
+        if isinstance(current, list):
+            for item in current:
+                data.append(item)
+        if isinstance(current, dict):
+            if 'name' in current and current['name'] == name:
+                return current['phone']
+            for i in current:
+                data.append(current[i])
     return None
