@@ -37,6 +37,13 @@ class Employee:
         """
         Задача: реализовать конструктор класса, чтобы все тесты проходили
         """
+        if  isinstance(name, str) and isinstance(position, str) and isinstance(salary, int):
+            self.name = name
+            self.position = position
+            self._salary = salary
+        else:
+            raise ValueError
+
 
         # пиши свой код здесь
 
@@ -44,6 +51,7 @@ class Employee:
         """
         Метод возвращает зарплату сотрудника.
         """
+        return self._salary
 
         # пиши свой код здесь
 
@@ -57,13 +65,22 @@ class Employee:
 
         # пиши свой код здесь
 
+        if isinstance(other, Employee):
+            if self.position in POSITIONS and other.position in POSITIONS:
+                return get_position_level(self.position) == get_position_level(other.position)
+            else:
+                raise ValueError
+        else:
+            raise TypeError
+
     def __str__(self):
         """
         Задача: реализовать строковое представление объекта.
         Пример вывода: 'name: Ivan position manager'
         """
-
+        #print("name: " + self.name + "position: " + self.position)
         # пиши свой код здесь
+        return f'name: {self.name} position: {self.position}'
 
     def __hash__(self):
         return id(self)
@@ -83,6 +100,8 @@ class Developer(Employee):
         """
 
         # пиши свой код здесь
+        self.language = language
+        super().__init__(name, self.position, salary)
 
 
 class Manager(Employee):
@@ -98,3 +117,4 @@ class Manager(Employee):
         """
 
         # пиши свой код здесь
+        super().__init__(name, self.position, salary)
